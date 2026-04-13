@@ -2,15 +2,29 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public int playerLives = 3;
+    private int playerLivesMax = 3;
+    public int playerScore;
+
+    public GameObject playerPrefab;
+    private GameObject[] enemies;
+
+    public void ResetGame()
     {
-        
+        playerLives = playerLivesMax;
+        playerScore = 0;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void RemoveEnemies()
     {
-        
+        if (playerLives == 0)
+        {
+            enemies = GameObject.FindGameObjectsWithTag("Enemy");
+
+            for (int i = 0; i < enemies.Length; i++)
+            {
+                Destroy(enemies[i]);
+            }
+        }
     }
 }
