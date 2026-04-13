@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class PlayerController : MonoBehaviour
 
     public GameObject arrowPrefab;
     public Transform arrowShootLocation;
+    public GameManager gameManager;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -48,6 +50,14 @@ public class PlayerController : MonoBehaviour
         if (attack == 1)
         {
             Debug.Log(attack);
+        }
+    }
+
+    void OnRestart(InputValue value)
+    {
+        if (gameManager.playerDied)
+        {
+            SceneManager.LoadScene("SampleScene");
         }
     }
 

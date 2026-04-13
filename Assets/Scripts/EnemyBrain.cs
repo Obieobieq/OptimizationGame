@@ -39,6 +39,7 @@ public class EnemyBrain : MonoBehaviour
         else if (collision.tag == "Arrow")
         { 
             KillEnemy();
+            gameManagerScript.UpdateScore(10);
             Destroy(collision.gameObject);
         }
     }
@@ -52,6 +53,7 @@ public class EnemyBrain : MonoBehaviour
 
     void KillEnemy() //Sets the enemy to play its death animation and die
     {
+        GetComponent<BoxCollider2D>().enabled = false;
         speed = 0;
         animator.SetBool("isDead", true);
         Debug.Log("Dead");
@@ -60,10 +62,5 @@ public class EnemyBrain : MonoBehaviour
     void DestroyEnemy() //Gets called by the animator
     {
         Destroy(gameObject);
-    }
-
-    private void OnDestroy()
-    {
-        gameManagerScript.UpdateScore(10);
     }
 }
