@@ -39,18 +39,20 @@ public class EnemyBrain : MonoBehaviour
         else if (collision.tag == "Arrow")
         { 
             KillEnemy();
+            Destroy(collision.gameObject);
         }
     }
 
     //Logic for if enemy reaches the endzone
     void EnemyInEndZone()
     {
-        gameManagerScript.playerLives--;
+        gameManagerScript.HealthLowered();
         gameManagerScript.RemoveEnemies();
     }
 
     void KillEnemy() //Sets the enemy to play its death animation and die
     {
+        speed = 0;
         animator.SetBool("isDead", true);
         Debug.Log("Dead");
     }
@@ -58,5 +60,10 @@ public class EnemyBrain : MonoBehaviour
     void DestroyEnemy() //Gets called by the animator
     {
         Destroy(gameObject);
+    }
+
+    private void OnDestroy()
+    {
+        gameManagerScript.UpdateScore(10);
     }
 }
