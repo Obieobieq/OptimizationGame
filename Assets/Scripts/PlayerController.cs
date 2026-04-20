@@ -53,13 +53,15 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void OnRestart()
+    void OnRestart(InputValue value)
     {
+        Debug.Log("Pressed R");
         if (gameManager.playerDied)
         {
             SceneManager.LoadScene("SampleScene");
             Time.timeScale = 1f;
         }
+       
     }
 
     void ResetAttackValue()
@@ -68,7 +70,7 @@ public class PlayerController : MonoBehaviour
         animator.SetFloat("Attack", attack);
     }
 
-    void OnQuit()
+    void OnQuit(InputValue value)
     {
         Application.Quit();
     }
